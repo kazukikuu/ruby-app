@@ -1,9 +1,11 @@
 require 'uri'
+require 'rack'
 
 class Params
 def parameter(url)
 ary = URI.parse(url)
-p ary.query         #=> "name=taro"
+query = Rack::Utils.parse_nested_query(ary.query)
+p query #=> {"name"=>"taro"}
 end
 end
 
